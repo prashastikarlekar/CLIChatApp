@@ -109,7 +109,12 @@ async function processAcceptCommandAction() {
 			var spc1 = command.indexOf(" ");
 			var spc2 = command.indexOf(" ", spc1 + 1);
 			var message = command.substring(spc2 + 1);
+			request.action = "send";
 			var toUser = command.substring(spc1 + 1, spc2);
+			request.toUser = toUser;
+			request.fromUser = model.user.username;
+			request.message = message;
+			client.write(JSON.stringify(request));
 		}
 
 		if (command.startsWith("broadcast ")) {
